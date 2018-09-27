@@ -1,22 +1,24 @@
 import * as Database from "../src/database";
 
-export function createOrderDummy(userId?: string, name?: string, description?: string) {
-  var user = {
-    name: name || "dummy order",
+export function createOrderDummy(userId?: string, product?: string, amount? : number, description?: string) {
+  var order = {
+    product: product || "dummy order",
+    amount : amount || 0,
     description: description || "I'm a dummy order!"
   };
 
   if (userId) {
-    user["userId"] = userId;
+    order["userId"] = userId;
   }
 
-  return user;
+  return order;
 }
 
 export function createUserDummy(email?: string) {
   var user = {
     email: email || "dummy@mail.com",
     name: "Dummy Jones",
+    userType : "customer",
     password: "123123"
   };
 
@@ -42,13 +44,13 @@ export function createSeedOrderData(database: Database.IDatabase, done: MochaDon
     .then(user => {
       return Promise.all([
         database.orderModel.create(
-          createOrderDummy(user._id, "Order 1", "Some dummy data 1")
+          createOrderDummy(user._id, "Order 1", 990, "Some dummy data 1")
         ),
         database.orderModel.create(
-          createOrderDummy(user._id, "Order 2", "Some dummy data 2")
+          createOrderDummy(user._id, "Order 2", 990, "Some dummy data 2")
         ),
         database.orderModel.create(
-          createOrderDummy(user._id, "Order 3", "Some dummy data 3")
+          createOrderDummy(user._id, "Order 3", 990,"Some dummy data 3")
         )
       ]);
     })

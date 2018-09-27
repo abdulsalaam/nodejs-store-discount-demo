@@ -23,15 +23,9 @@ describe("OrderController Tests", () => {
     });
   });
 
-  /*beforeEach(done => {
-    Utils.createSeedOrderData(database, done);
-  });
-
-  afterEach(done => {
-    Utils.clearDatabase(database, done);
-  });*/
   beforeEach(done => {
     Utils.createSeedUserData(database, done);
+    Utils.createSeedOrderData(database, done);
   });
 
   afterEach(done => {
